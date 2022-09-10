@@ -45,12 +45,17 @@ if [ -f ${BUILD_DIR}/dotnet-tools.json ] || [ -f ${BUILD_DIR}/.config/dotnet-too
 	dotnet tool restore
 fi
 
+topic "Build Dir"
+info $BUILD_DIR
+
+
 if [ -z ${PROJECT_FILE:-} ]; then
-	PROJECT_FILE=$(x=$(dirname $(find ${BUILD_DIR} -maxdepth 5 -iname Startup.cs -o -iname Program.cs -o -iname Program.fs | head -1)); while [[ "$x" =~ $BUILD_DIR ]] ; do find "$x" -maxdepth 1 -name *.fsproj -o -name *.Scm.WebApi.csproj; x=`dirname "$x"`; done)
+	PROJECT_FILE=$(x=$(dirname $(find ${BUILD_DIR} -maxdepth 5 -iname Startup.cs -o -iname Program.cs -o -iname Program.fs | head -1)); while [[ "$x" =~ $BUILD_DIR ]] ; do find "$x" -maxdepth 1 -name *Tesla.Scm.WebApi.fsproj -o -name *Tesla.Scm.WebApi.csproj; x=`dirname "$x"`; done)
 fi
 
 topic "Project File"
 info $PROJECT_FILE
+
 
 if [ -z ${PROJECT_NAME:-} ]; then
 	PROJECT_NAME=$(basename ${PROJECT_FILE%.*})
