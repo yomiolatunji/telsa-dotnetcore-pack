@@ -48,6 +48,7 @@ fi
 topic "Build Dir"
 info $BUILD_DIR
 
+PROJECT_FILE="${BUILD_DIR}/Tesla/Tesla.Scm.WebApi/Tesla.Scm.WebApi.csproj "
 
 if [ -z ${PROJECT_FILE:-} ]; then
 	PROJECT_FILE=$(x=$(dirname $(find ${BUILD_DIR} -maxdepth 5 -iname Startup.cs -o -iname Program.cs -o -iname Program.fs | head -1)); while [[ "$x" =~ $BUILD_DIR ]] ; do find "$x" -maxdepth 1 -name *Tesla.Scm.WebApi.fsproj -o -name *Tesla.Scm.WebApi.csproj; x=`dirname "$x"`; done)
